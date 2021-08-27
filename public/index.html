@@ -1,0 +1,4530 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MMS Example API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>MMS Example API</h1>
+    <div class="app-desc">Documentation for MMS API</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 0.0.1</div>
+    
+    <div class="license-info">Apache 2.0</div>
+    <div class="license-url">http://www.apache.org/licenses/LICENSE-2.0.txt</div>
+  <h2>Access</h2>
+    <ol>
+      <li></li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Artifacts">Artifacts</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateArtifacts"><code><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/elements/{elementId}</code></a></li>
+  <li><a href="#deleteArtifactByExtension"><code><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}/elements/{elementId}/{extension}</code></a></li>
+  <li><a href="#getArtifactByExtension"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements/{elementId}/{extension}</code></a></li>
+  </ul>
+  <h4><a href="#Auth">Auth</a></h4>
+  <ul>
+  <li><a href="#checkAuthenticationToken"><code><span class="http-method">get</span> /checkAuth</code></a></li>
+  <li><a href="#createAuthenticationToken"><code><span class="http-method">post</span> /authentication</code></a></li>
+  <li><a href="#createUser"><code><span class="http-method">post</span> /user</code></a></li>
+  <li><a href="#getAuthenticationToken"><code><span class="http-method">get</span> /authentication</code></a></li>
+  <li><a href="#getBranchPermissions"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/permissions</code></a></li>
+  <li><a href="#getOrgPermissions"><code><span class="http-method">get</span> /orgs/{orgId}/permissions</code></a></li>
+  <li><a href="#getProjectPermissions"><code><span class="http-method">get</span> /projects/{projectId}/permissions</code></a></li>
+  <li><a href="#getUsers"><code><span class="http-method">get</span> /users</code></a></li>
+  <li><a href="#lookupPermissions"><code><span class="http-method">put</span> /permissions</code></a></li>
+  <li><a href="#updateBranchPermissions"><code><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/permissions</code></a></li>
+  <li><a href="#updateOrgPermissions"><code><span class="http-method">post</span> /orgs/{orgId}/permissions</code></a></li>
+  <li><a href="#updatePassword"><code><span class="http-method">post</span> /password</code></a></li>
+  <li><a href="#updateProjectPermissions"><code><span class="http-method">post</span> /projects/{projectId}/permissions</code></a></li>
+  </ul>
+  <h4><a href="#Commits">Commits</a></h4>
+  <ul>
+  <li><a href="#getCommit"><code><span class="http-method">get</span> /projects/{projectId}/commits/{commitId}</code></a></li>
+  <li><a href="#getCommits"><code><span class="http-method">put</span> /projects/{projectId}/commits</code></a></li>
+  <li><a href="#getElementCommits"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements/{elementId}/commits</code></a></li>
+  <li><a href="#getRefCommits"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/commits</code></a></li>
+  </ul>
+  <h4><a href="#Elements">Elements</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateElements"><code><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/elements</code></a></li>
+  <li><a href="#deleteElement"><code><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}/elements/{elementId}</code></a></li>
+  <li><a href="#deleteElements"><code><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}/elements</code></a></li>
+  <li><a href="#getAllElements"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements</code></a></li>
+  <li><a href="#getArtifactForElement1"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements/{elementId}</code></a></li>
+  <li><a href="#getElements"><code><span class="http-method">put</span> /projects/{projectId}/refs/{refId}/elements</code></a></li>
+  </ul>
+  <h4><a href="#Groups">Groups</a></h4>
+  <ul>
+  <li><a href="#createLocalGroup"><code><span class="http-method">put</span> /groups/{group}</code></a></li>
+  <li><a href="#deleteLocalGroup"><code><span class="http-method">delete</span> /groups/{group}</code></a></li>
+  <li><a href="#getAllGroups"><code><span class="http-method">get</span> /groups</code></a></li>
+  <li><a href="#getGroup"><code><span class="http-method">get</span> /groups/{group}</code></a></li>
+  <li><a href="#updateGroupUsers"><code><span class="http-method">post</span> /groups/{group}/users</code></a></li>
+  </ul>
+  <h4><a href="#Monitor">Monitor</a></h4>
+  <ul>
+  <li><a href="#healthcheck"><code><span class="http-method">get</span> /healthcheck</code></a></li>
+  </ul>
+  <h4><a href="#Notebooks">Notebooks</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateNotebooks"><code><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/notebooks</code></a></li>
+  <li><a href="#getAllNotebooks"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/notebooks</code></a></li>
+  <li><a href="#getNotebook"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/notebooks/{notebookId}</code></a></li>
+  <li><a href="#getNotebooks"><code><span class="http-method">put</span> /projects/{projectId}/refs/{refId}/notebooks</code></a></li>
+  </ul>
+  <h4><a href="#Orgs">Orgs</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateOrgs"><code><span class="http-method">post</span> /orgs</code></a></li>
+  <li><a href="#deleteOrg"><code><span class="http-method">delete</span> /orgs/{orgId}</code></a></li>
+  <li><a href="#getAllOrgs"><code><span class="http-method">get</span> /orgs</code></a></li>
+  <li><a href="#getOrg"><code><span class="http-method">get</span> /orgs/{orgId}</code></a></li>
+  </ul>
+  <h4><a href="#Projects">Projects</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateProjects"><code><span class="http-method">post</span> /projects</code></a></li>
+  <li><a href="#deleteProject"><code><span class="http-method">delete</span> /projects/{projectId}</code></a></li>
+  <li><a href="#getAllProjects"><code><span class="http-method">get</span> /projects</code></a></li>
+  <li><a href="#getProject"><code><span class="http-method">get</span> /projects/{projectId}</code></a></li>
+  <li><a href="#getProjectSchemaOptions"><code><span class="http-method">get</span> /schemas</code></a></li>
+  </ul>
+  <h4><a href="#Refs">Refs</a></h4>
+  <ul>
+  <li><a href="#createRefs"><code><span class="http-method">post</span> /projects/{projectId}/refs</code></a></li>
+  <li><a href="#deleteRef"><code><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}</code></a></li>
+  <li><a href="#getAllRefs"><code><span class="http-method">get</span> /projects/{projectId}/refs</code></a></li>
+  <li><a href="#getRef"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}</code></a></li>
+  </ul>
+  <h4><a href="#Search">Search</a></h4>
+  <ul>
+  <li><a href="#getBasicSearch"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/search</code></a></li>
+  <li><a href="#postBasicSearch"><code><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/search</code></a></li>
+  </ul>
+  <h4><a href="#Views">Views</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateViews"><code><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/views</code></a></li>
+  <li><a href="#getDocuments"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/documents</code></a></li>
+  <li><a href="#getGroups"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/groups</code></a></li>
+  <li><a href="#getMounts"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/mounts</code></a></li>
+  <li><a href="#getView"><code><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/views/{viewId}</code></a></li>
+  <li><a href="#getViews"><code><span class="http-method">put</span> /projects/{projectId}/refs/{refId}/views</code></a></li>
+  </ul>
+  <h4><a href="#Webhooks">Webhooks</a></h4>
+  <ul>
+  <li><a href="#createOrUpdateWebhooks"><code><span class="http-method">post</span> /projects/{projectId}/webhooks</code></a></li>
+  <li><a href="#deleteWebhooks"><code><span class="http-method">delete</span> /projects/{projectId}/webhooks</code></a></li>
+  <li><a href="#getAllWebhooks"><code><span class="http-method">get</span> /projects/{projectId}/webhooks</code></a></li>
+  </ul>
+
+  <h1><a name="Artifacts">Artifacts</a></h1>
+  <div class="method"><a name="createOrUpdateArtifacts"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/elements/{elementId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateArtifacts</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">elementId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">file (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  format: binary</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteArtifactByExtension"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}/elements/{elementId}/{extension}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteArtifactByExtension</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">elementId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">extension (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getArtifactByExtension"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements/{elementId}/{extension}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getArtifactByExtension</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">elementId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">extension (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Auth">Auth</a></h1>
+  <div class="method"><a name="checkAuthenticationToken"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /checkAuth</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">checkAuthenticationToken</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#JwtTokenValidationResponse">JwtTokenValidationResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "username" : "username"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#JwtTokenValidationResponse">JwtTokenValidationResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="createAuthenticationToken"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /authentication</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createAuthenticationToken</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#JwtAuthenticationRequest">JwtAuthenticationRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#JwtAuthenticationResponse">JwtAuthenticationResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#JwtAuthenticationResponse">JwtAuthenticationResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="createUser"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UserCreateRequest">UserCreateRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UserCreateRequest">UserCreateRequest</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "password" : "password",
+  "firstname" : "firstname",
+  "admin" : true,
+  "email" : "email",
+  "username" : "username",
+  "lastname" : "lastname"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#UserCreateRequest">UserCreateRequest</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAuthenticationToken"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /authentication</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAuthenticationToken</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#JwtAuthenticationResponse">JwtAuthenticationResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#JwtAuthenticationResponse">JwtAuthenticationResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getBranchPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getBranchPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionsResponse">PermissionsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "public" : true,
+  "inherit" : true,
+  "users" : {
+    "permissions" : [ {
+      "role" : "role",
+      "name" : "name"
+    }, {
+      "role" : "role",
+      "name" : "name"
+    } ]
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionsResponse">PermissionsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getOrgPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /orgs/{orgId}/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getOrgPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">orgId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionsResponse">PermissionsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "public" : true,
+  "inherit" : true,
+  "users" : {
+    "permissions" : [ {
+      "role" : "role",
+      "name" : "name"
+    }, {
+      "role" : "role",
+      "name" : "name"
+    } ]
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionsResponse">PermissionsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getProjectPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getProjectPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionsResponse">PermissionsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "public" : true,
+  "inherit" : true,
+  "users" : {
+    "permissions" : [ {
+      "role" : "role",
+      "name" : "name"
+    }, {
+      "role" : "role",
+      "name" : "name"
+    } ]
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionsResponse">PermissionsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getUsers"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /users</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getUsers</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UsersResponse">UsersResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "users" : [ {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "password" : "password",
+    "admin" : true,
+    "fullName" : "fullName",
+    "email" : "email",
+    "enabled" : true,
+    "username" : "username"
+  }, {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "password" : "password",
+    "admin" : true,
+    "fullName" : "fullName",
+    "email" : "email",
+    "enabled" : true,
+    "username" : "username"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#UsersResponse">UsersResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="lookupPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">lookupPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PermissionLookupRequest">PermissionLookupRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionLookupResponse">PermissionLookupResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "lookups" : [ {
+    "allowAnonIfPublic" : true,
+    "hasPrivilege" : true,
+    "refId" : "refId",
+    "privilege" : "ORG_READ",
+    "type" : "ORG",
+    "projectId" : "projectId",
+    "orgId" : "orgId"
+  }, {
+    "allowAnonIfPublic" : true,
+    "hasPrivilege" : true,
+    "refId" : "refId",
+    "privilege" : "ORG_READ",
+    "type" : "ORG",
+    "projectId" : "projectId",
+    "orgId" : "orgId"
+  } ],
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "allPassed" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionLookupResponse">PermissionLookupResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateBranchPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateBranchPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PermissionsRequest">PermissionsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionUpdatesResponse">PermissionUpdatesResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "public" : true,
+  "inherit" : true,
+  "users" : {
+    "permissionUpdates" : [ {
+      "branchId" : "branchId",
+      "role" : "role",
+      "orgName" : "orgName",
+      "inherited" : true,
+      "name" : "name",
+      "action" : "ADD",
+      "projectName" : "projectName",
+      "projectId" : "projectId",
+      "orgId" : "orgId"
+    }, {
+      "branchId" : "branchId",
+      "role" : "role",
+      "orgName" : "orgName",
+      "inherited" : true,
+      "name" : "name",
+      "action" : "ADD",
+      "projectName" : "projectName",
+      "projectId" : "projectId",
+      "orgId" : "orgId"
+    } ]
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionUpdatesResponse">PermissionUpdatesResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateOrgPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /orgs/{orgId}/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateOrgPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">orgId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PermissionsRequest">PermissionsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionUpdatesResponse">PermissionUpdatesResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "public" : true,
+  "inherit" : true,
+  "users" : {
+    "permissionUpdates" : [ {
+      "branchId" : "branchId",
+      "role" : "role",
+      "orgName" : "orgName",
+      "inherited" : true,
+      "name" : "name",
+      "action" : "ADD",
+      "projectName" : "projectName",
+      "projectId" : "projectId",
+      "orgId" : "orgId"
+    }, {
+      "branchId" : "branchId",
+      "role" : "role",
+      "orgName" : "orgName",
+      "inherited" : true,
+      "name" : "name",
+      "action" : "ADD",
+      "projectName" : "projectName",
+      "projectId" : "projectId",
+      "orgId" : "orgId"
+    } ]
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionUpdatesResponse">PermissionUpdatesResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updatePassword"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /password</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updatePassword</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UserCreateRequest">UserCreateRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Object
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{ }</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#Object">Object</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateProjectPermissions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateProjectPermissions</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PermissionsRequest">PermissionsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PermissionUpdatesResponse">PermissionUpdatesResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "public" : true,
+  "inherit" : true,
+  "users" : {
+    "permissionUpdates" : [ {
+      "branchId" : "branchId",
+      "role" : "role",
+      "orgName" : "orgName",
+      "inherited" : true,
+      "name" : "name",
+      "action" : "ADD",
+      "projectName" : "projectName",
+      "projectId" : "projectId",
+      "orgId" : "orgId"
+    }, {
+      "branchId" : "branchId",
+      "role" : "role",
+      "orgName" : "orgName",
+      "inherited" : true,
+      "name" : "name",
+      "action" : "ADD",
+      "projectName" : "projectName",
+      "projectId" : "projectId",
+      "orgId" : "orgId"
+    } ]
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#PermissionUpdatesResponse">PermissionUpdatesResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Commits">Commits</a></h1>
+  <div class="method"><a name="getCommit"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/commits/{commitId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getCommit</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">commitId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommitsResponse">CommitsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "commits" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#CommitsResponse">CommitsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getCommits"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /projects/{projectId}/commits</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getCommits</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#CommitsRequest">CommitsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommitsResponse">CommitsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "commits" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#CommitsResponse">CommitsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getElementCommits"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements/{elementId}/commits</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getElementCommits</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">elementId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommitsResponse">CommitsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "commits" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#CommitsResponse">CommitsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getRefCommits"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/commits</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getRefCommits</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">limit (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">maxTimestamp (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommitsResponse">CommitsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "commits" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#CommitsResponse">CommitsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Elements">Elements</a></h1>
+  <div class="method"><a name="createOrUpdateElements"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/elements</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateElements</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#ElementsRequest">ElementsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">overwrite (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsCommitResponse">ElementsCommitResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "commitId" : "commitId"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsCommitResponse">ElementsCommitResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteElement"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}/elements/{elementId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteElement</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">elementId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsCommitResponse">ElementsCommitResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "commitId" : "commitId"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsCommitResponse">ElementsCommitResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteElements"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}/elements</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteElements</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllElements"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllElements</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/x-ndjson</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getArtifactForElement1"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/elements/{elementId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getArtifactForElement1</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">elementId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+    <h3 class="field-label">Request headers</h3>
+    <div class="field-items">
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getElements"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /projects/{projectId}/refs/{refId}/elements</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getElements</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#ElementsRequest">ElementsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Groups">Groups</a></h1>
+  <div class="method"><a name="createLocalGroup"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /groups/{group}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createLocalGroup</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">group (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteLocalGroup"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /groups/{group}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteLocalGroup</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">group (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllGroups"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /groups</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllGroups</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GroupsResponse">GroupsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "groups" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#GroupsResponse">GroupsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getGroup"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /groups/{group}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getGroup</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">group (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GroupResponse">GroupResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "users" : [ "users", "users" ],
+  "group" : "group"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#GroupResponse">GroupResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateGroupUsers"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /groups/{group}/users</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateGroupUsers</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">group (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#GroupUpdateRequest">GroupUpdateRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GroupUpdateResponse">GroupUpdateResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "removed" : [ "removed", "removed" ],
+  "added" : [ "added", "added" ],
+  "rejected" : [ "rejected", "rejected" ],
+  "group" : "group"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#GroupUpdateResponse">GroupUpdateResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Monitor">Monitor</a></h1>
+  <div class="method"><a name="healthcheck"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /healthcheck</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">healthcheck</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Notebooks">Notebooks</a></h1>
+  <div class="method"><a name="createOrUpdateNotebooks"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/notebooks</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateNotebooks</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#NotebooksRequest">NotebooksRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">overwrite (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#NotebooksResponse">NotebooksResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "notebooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#NotebooksResponse">NotebooksResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllNotebooks"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/notebooks</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllNotebooks</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#NotebooksResponse">NotebooksResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "notebooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#NotebooksResponse">NotebooksResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getNotebook"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/notebooks/{notebookId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getNotebook</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">notebookId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#NotebooksResponse">NotebooksResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "notebooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#NotebooksResponse">NotebooksResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getNotebooks"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /projects/{projectId}/refs/{refId}/notebooks</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getNotebooks</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#NotebooksRequest">NotebooksRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#NotebooksResponse">NotebooksResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "notebooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#NotebooksResponse">NotebooksResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Orgs">Orgs</a></h1>
+  <div class="method"><a name="createOrUpdateOrgs"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /orgs</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateOrgs</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#OrganizationsRequest">OrganizationsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OrganizationsResponse">OrganizationsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "orgs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#OrganizationsResponse">OrganizationsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteOrg"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /orgs/{orgId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteOrg</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">orgId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OrganizationsResponse">OrganizationsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "orgs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#OrganizationsResponse">OrganizationsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllOrgs"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /orgs</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllOrgs</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OrganizationsResponse">OrganizationsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "orgs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#OrganizationsResponse">OrganizationsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getOrg"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /orgs/{orgId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getOrg</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">orgId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OrganizationsResponse">OrganizationsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "orgs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#OrganizationsResponse">OrganizationsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Projects">Projects</a></h1>
+  <div class="method"><a name="createOrUpdateProjects"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateProjects</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#ProjectsRequest">ProjectsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ProjectsResponse">ProjectsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "projects" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ProjectsResponse">ProjectsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteProject"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /projects/{projectId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteProject</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">hard (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: false </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ProjectsResponse">ProjectsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "projects" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ProjectsResponse">ProjectsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllProjects"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllProjects</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">orgId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ProjectsResponse">ProjectsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "projects" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ProjectsResponse">ProjectsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getProject"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getProject</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ProjectsResponse">ProjectsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "projects" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ProjectsResponse">ProjectsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getProjectSchemaOptions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /schemas</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getProjectSchemaOptions</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SchemasResponse">SchemasResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "schemas" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#SchemasResponse">SchemasResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Refs">Refs</a></h1>
+  <div class="method"><a name="createRefs"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createRefs</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#RefsRequest">RefsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RefsResponse">RefsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "refs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#RefsResponse">RefsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteRef"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /projects/{projectId}/refs/{refId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteRef</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RefsResponse">RefsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "refs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#RefsResponse">RefsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllRefs"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllRefs</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RefsResponse">RefsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "refs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#RefsResponse">RefsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getRef"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getRef</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RefsResponse">RefsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "refs" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#RefsResponse">RefsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Search">Search</a></h1>
+  <div class="method"><a name="getBasicSearch"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/search</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getBasicSearch</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsSearchResponse">ElementsSearchResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejectedTotal" : 6,
+  "total" : 0,
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsSearchResponse">ElementsSearchResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postBasicSearch"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/search</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postBasicSearch</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#BasicSearchRequest">BasicSearchRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsSearchResponse">ElementsSearchResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejectedTotal" : 6,
+  "total" : 0,
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsSearchResponse">ElementsSearchResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Views">Views</a></h1>
+  <div class="method"><a name="createOrUpdateViews"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/refs/{refId}/views</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateViews</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#ElementsRequest">ElementsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">overwrite (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getDocuments"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/documents</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getDocuments</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#DocumentsResponse">DocumentsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "documents" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#DocumentsResponse">DocumentsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getGroups"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/groups</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getGroups</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GroupsResponse">GroupsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ],
+  "groups" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#GroupsResponse">GroupsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getMounts"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/mounts</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getMounts</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#MountsResponse">MountsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "projects" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#MountsResponse">MountsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getView"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/refs/{refId}/views/{viewId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getView</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">viewId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getViews"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /projects/{projectId}/refs/{refId}/views</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getViews</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>      <div class="param">refId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#ElementsRequest">ElementsRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">commitId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ElementsResponse">ElementsResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "elements" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#ElementsResponse">ElementsResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Webhooks">Webhooks</a></h1>
+  <div class="method"><a name="createOrUpdateWebhooks"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /projects/{projectId}/webhooks</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createOrUpdateWebhooks</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#WebhookRequest">WebhookRequest</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#WebhookResponse">WebhookResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "webhooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#WebhookResponse">WebhookResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteWebhooks"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /projects/{projectId}/webhooks</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteWebhooks</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#WebhookResponse">WebhookResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "webhooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#WebhookResponse">WebhookResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllWebhooks"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /projects/{projectId}/webhooks</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAllWebhooks</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">projectId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#WebhookResponse">WebhookResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rejected" : [ {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  }, {
+    "code" : 0,
+    "message" : "message",
+    "object" : { }
+  } ],
+  "webhooks" : [ {
+    "key" : { }
+  }, {
+    "key" : { }
+  } ],
+  "messages" : [ "messages", "messages" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    default response
+        <a href="#WebhookResponse">WebhookResponse</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#BasicSearchRequest"><code>BasicSearchRequest</code></a></li>
+    <li><a href="#Commit"><code>Commit</code></a></li>
+    <li><a href="#CommitsRequest"><code>CommitsRequest</code></a></li>
+    <li><a href="#CommitsResponse"><code>CommitsResponse</code></a></li>
+    <li><a href="#DocumentsResponse"><code>DocumentsResponse</code></a></li>
+    <li><a href="#Element"><code>Element</code></a></li>
+    <li><a href="#ElementVersion"><code>ElementVersion</code></a></li>
+    <li><a href="#ElementsCommitResponse"><code>ElementsCommitResponse</code></a></li>
+    <li><a href="#ElementsRequest"><code>ElementsRequest</code></a></li>
+    <li><a href="#ElementsResponse"><code>ElementsResponse</code></a></li>
+    <li><a href="#ElementsSearchResponse"><code>ElementsSearchResponse</code></a></li>
+    <li><a href="#GroupResponse"><code>GroupResponse</code></a></li>
+    <li><a href="#GroupUpdateRequest"><code>GroupUpdateRequest</code></a></li>
+    <li><a href="#GroupUpdateResponse"><code>GroupUpdateResponse</code></a></li>
+    <li><a href="#GroupsResponse"><code>GroupsResponse</code></a></li>
+    <li><a href="#JwtAuthenticationRequest"><code>JwtAuthenticationRequest</code></a></li>
+    <li><a href="#JwtAuthenticationResponse"><code>JwtAuthenticationResponse</code></a></li>
+    <li><a href="#JwtTokenValidationResponse"><code>JwtTokenValidationResponse</code></a></li>
+    <li><a href="#Mount"><code>Mount</code></a></li>
+    <li><a href="#MountsResponse"><code>MountsResponse</code></a></li>
+    <li><a href="#NotebooksRequest"><code>NotebooksRequest</code></a></li>
+    <li><a href="#NotebooksResponse"><code>NotebooksResponse</code></a></li>
+    <li><a href="#Org"><code>Org</code></a></li>
+    <li><a href="#OrganizationsRequest"><code>OrganizationsRequest</code></a></li>
+    <li><a href="#OrganizationsResponse"><code>OrganizationsResponse</code></a></li>
+    <li><a href="#Permission"><code>Permission</code></a></li>
+    <li><a href="#PermissionLookup"><code>PermissionLookup</code></a></li>
+    <li><a href="#PermissionLookupRequest"><code>PermissionLookupRequest</code></a></li>
+    <li><a href="#PermissionLookupResponse"><code>PermissionLookupResponse</code></a></li>
+    <li><a href="#PermissionResponse"><code>PermissionResponse</code></a></li>
+    <li><a href="#PermissionUpdate"><code>PermissionUpdate</code></a></li>
+    <li><a href="#PermissionUpdateRequest"><code>PermissionUpdateRequest</code></a></li>
+    <li><a href="#PermissionUpdateResponse"><code>PermissionUpdateResponse</code></a></li>
+    <li><a href="#PermissionUpdatesResponse"><code>PermissionUpdatesResponse</code></a></li>
+    <li><a href="#PermissionsRequest"><code>PermissionsRequest</code></a></li>
+    <li><a href="#PermissionsResponse"><code>PermissionsResponse</code></a></li>
+    <li><a href="#Project"><code>Project</code></a></li>
+    <li><a href="#ProjectsRequest"><code>ProjectsRequest</code></a></li>
+    <li><a href="#ProjectsResponse"><code>ProjectsResponse</code></a></li>
+    <li><a href="#Ref"><code>Ref</code></a></li>
+    <li><a href="#RefsRequest"><code>RefsRequest</code></a></li>
+    <li><a href="#RefsResponse"><code>RefsResponse</code></a></li>
+    <li><a href="#Rejection"><code>Rejection</code></a></li>
+    <li><a href="#Schema"><code>Schema</code></a></li>
+    <li><a href="#SchemasResponse"><code>SchemasResponse</code></a></li>
+    <li><a href="#User"><code>User</code></a></li>
+    <li><a href="#UserCreateRequest"><code>UserCreateRequest</code></a></li>
+    <li><a href="#UsersResponse"><code>UsersResponse</code></a></li>
+    <li><a href="#Webhook"><code>Webhook</code></a></li>
+    <li><a href="#WebhookRequest"><code>WebhookRequest</code></a></li>
+    <li><a href="#WebhookResponse"><code>WebhookResponse</code></a></li>
+    <li><a href="#elements_elementId_body"><code>elements_elementId_body</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="BasicSearchRequest"><code>BasicSearchRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">params (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">map[String, String]</a></span>  </div>
+<div class="param">recurse (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">map[String, String]</a></span>  </div>
+<div class="param">from (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">size (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Commit"><code>Commit</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CommitsRequest"><code>CommitsRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">commits </div><div class="param-desc"><span class="param-type"><a href="#Commit">array[Commit]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CommitsResponse"><code>CommitsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">commits (optional)</div><div class="param-desc"><span class="param-type"><a href="#Commit">array[Commit]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="DocumentsResponse"><code>DocumentsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">documents (optional)</div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Element"><code>Element</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ElementVersion"><code>ElementVersion</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">_previousDocId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">_docId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ElementsCommitResponse"><code>ElementsCommitResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">elements (optional)</div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+<div class="param">commitId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ElementsRequest"><code>ElementsRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">source (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">comment (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">elements </div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ElementsResponse"><code>ElementsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">elements (optional)</div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ElementsSearchResponse"><code>ElementsSearchResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">elements (optional)</div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+<div class="param">total (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">rejectedTotal (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GroupResponse"><code>GroupResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">group </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">users (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GroupUpdateRequest"><code>GroupUpdateRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">action </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">ADD</div><div class="param-enum">REMOVE</div>
+<div class="param">users </div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GroupUpdateResponse"><code>GroupUpdateResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">group </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">added (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">removed (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GroupsResponse"><code>GroupsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">groups (optional)</div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="JwtAuthenticationRequest"><code>JwtAuthenticationRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="JwtAuthenticationResponse"><code>JwtAuthenticationResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="JwtTokenValidationResponse"><code>JwtTokenValidationResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Mount"><code>Mount</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MountsResponse"><code>MountsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">projects (optional)</div><div class="param-desc"><span class="param-type"><a href="#Mount">array[Mount]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="NotebooksRequest"><code>NotebooksRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">source (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">comment (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">notebooks </div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="NotebooksResponse"><code>NotebooksResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">notebooks (optional)</div><div class="param-desc"><span class="param-type"><a href="#Element">array[Element]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Org"><code>Org</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrganizationsRequest"><code>OrganizationsRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">orgs </div><div class="param-desc"><span class="param-type"><a href="#Org">array[Org]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrganizationsResponse"><code>OrganizationsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">orgs (optional)</div><div class="param-desc"><span class="param-type"><a href="#Org">array[Org]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Permission"><code>Permission</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">role (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionLookup"><code>PermissionLookup</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">ORG</div><div class="param-enum">PROJECT</div><div class="param-enum">BRANCH</div>
+<div class="param">orgId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">projectId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">refId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">privilege (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">ORG_READ</div><div class="param-enum">ORG_EDIT</div><div class="param-enum">ORG_UPDATE_PERMISSIONS</div><div class="param-enum">ORG_READ_PERMISSIONS</div><div class="param-enum">ORG_CREATE_PROJECT</div><div class="param-enum">ORG_DELETE</div><div class="param-enum">PROJECT_READ</div><div class="param-enum">PROJECT_EDIT</div><div class="param-enum">PROJECT_READ_COMMITS</div><div class="param-enum">PROJECT_CREATE_BRANCH</div><div class="param-enum">PROJECT_DELETE</div><div class="param-enum">PROJECT_UPDATE_PERMISSIONS</div><div class="param-enum">PROJECT_READ_PERMISSIONS</div><div class="param-enum">PROJECT_CREATE_WEBHOOKS</div><div class="param-enum">BRANCH_READ</div><div class="param-enum">BRANCH_EDIT_CONTENT</div><div class="param-enum">BRANCH_DELETE</div><div class="param-enum">BRANCH_UPDATE_PERMISSIONS</div><div class="param-enum">BRANCH_READ_PERMISSIONS</div>
+<div class="param">allowAnonIfPublic (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">hasPrivilege (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionLookupRequest"><code>PermissionLookupRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">lookups (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionLookup">array[PermissionLookup]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionLookupResponse"><code>PermissionLookupResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">lookups (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionLookup">array[PermissionLookup]</a></span>  </div>
+<div class="param">allPassed (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionResponse"><code>PermissionResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">permissions (optional)</div><div class="param-desc"><span class="param-type"><a href="#Permission">array[Permission]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionUpdate"><code>PermissionUpdate</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">action (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">ADD</div><div class="param-enum">REMOVE</div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">role (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">orgId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">orgName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">projectId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">projectName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">branchId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">inherited (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionUpdateRequest"><code>PermissionUpdateRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">action </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">MODIFY</div><div class="param-enum">REPLACE</div><div class="param-enum">REMOVE</div>
+<div class="param">permissions </div><div class="param-desc"><span class="param-type"><a href="#Permission">array[Permission]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionUpdateResponse"><code>PermissionUpdateResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">permissionUpdates (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionUpdate">array[PermissionUpdate]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionUpdatesResponse"><code>PermissionUpdatesResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">inherit (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">users (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionUpdateResponse">PermissionUpdateResponse</a></span>  </div>
+<div class="param">groups (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionUpdateResponse">PermissionUpdateResponse</a></span>  </div>
+<div class="param">public (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionsRequest"><code>PermissionsRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">users (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionUpdateRequest">PermissionUpdateRequest</a></span>  </div>
+<div class="param">groups (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionUpdateRequest">PermissionUpdateRequest</a></span>  </div>
+<div class="param">inherit (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">public (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PermissionsResponse"><code>PermissionsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">inherit (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">users (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionResponse">PermissionResponse</a></span>  </div>
+<div class="param">groups (optional)</div><div class="param-desc"><span class="param-type"><a href="#PermissionResponse">PermissionResponse</a></span>  </div>
+<div class="param">public (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Project"><code>Project</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ProjectsRequest"><code>ProjectsRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">projects </div><div class="param-desc"><span class="param-type"><a href="#Project">array[Project]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ProjectsResponse"><code>ProjectsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">projects (optional)</div><div class="param-desc"><span class="param-type"><a href="#Project">array[Project]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Ref"><code>Ref</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RefsRequest"><code>RefsRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">refs </div><div class="param-desc"><span class="param-type"><a href="#Ref">array[Ref]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RefsResponse"><code>RefsResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">refs (optional)</div><div class="param-desc"><span class="param-type"><a href="#Ref">array[Ref]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Rejection"><code>Rejection</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">object (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span>  </div>
+<div class="param">code (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Schema"><code>Schema</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SchemasResponse"><code>SchemasResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">schemas (optional)</div><div class="param-desc"><span class="param-type"><a href="#Schema">array[Schema]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">firstName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lastName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">admin (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">enabled (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">fullName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserCreateRequest"><code>UserCreateRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">firstname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lastname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">admin (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UsersResponse"><code>UsersResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">users (optional)</div><div class="param-desc"><span class="param-type"><a href="#User">array[User]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Webhook"><code>Webhook</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="WebhookRequest"><code>WebhookRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">webhooks </div><div class="param-desc"><span class="param-type"><a href="#Webhook">array[Webhook]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="WebhookResponse"><code>WebhookResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">messages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">rejected (optional)</div><div class="param-desc"><span class="param-type"><a href="#Rejection">array[Rejection]</a></span>  </div>
+<div class="param">webhooks (optional)</div><div class="param-desc"><span class="param-type"><a href="#Webhook">array[Webhook]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="elements_elementId_body"><code>elements_elementId_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">file (optional)</div><div class="param-desc"><span class="param-type"><a href="#binary">byte[]</a></span>  format: binary</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

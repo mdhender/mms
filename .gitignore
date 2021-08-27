@@ -2,6 +2,7 @@
 *.gradle
 *.tar
 *.tgz
+*.zip
 .idea/
 build.gradle.txt
 testdata/
