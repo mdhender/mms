@@ -1,0 +1,136 @@
+{
+    "mms": {
+        "comment": "# See authenticator module for example configuration",
+        "admin": {
+            "username": "test",
+            "password": "test"
+        },
+        "stream": {
+            "batch": {
+                "size": 100000
+            }
+        }
+    },
+    "jwt": {
+        "secret": "make_me_something_really_long",
+        "expiration": 86400,
+        "header": "Authorization"
+    },
+    "ldap": {
+        "comment": "see ldap module for example configuration",
+        "provider": {
+            "base": "ou=something,dc=openmbee,dc=org",
+            "url": "ldaps://ldap.openmbee.org/${ldap.provider.base}",
+            "userdn": "",
+            "password": ""
+        },
+        "user": {
+            "dn": {
+                "pattern": "uid={0}"
+            },
+            "attributes": {
+                "username": "",
+                "email": ""
+            }
+        },
+        "group": {
+            "role": {
+                "attribute": "cn"
+            },
+            "search": {
+                "base": "",
+                "filter": "uniqueMember={0}"
+            }
+        }
+    },
+    "spring": {
+        "datasource": {
+            "comment": "# See core module for example configuration",
+            "datasource": {
+                "url": "jdbc:postgresql://localhost:5432",
+                "comment": "url=jdbc:mysql://localhost:3306",
+                "database": "mms",
+                "username": "mmsuser",
+                "password": "test1234",
+                "driver-class-name": "org.postgresql.Driver",
+                "comment2": "driver-class-name=com.mysql.jdbc.Driver",
+                "initialization-mode": "always"
+            }
+        },
+        "jpa": {
+            "properties": {
+                "comment": "# The SQL dialect makes Hibernate generate better SQL for the chosen database",
+                "hibernate": {
+                    "dialect": "org.hibernate.dialect.PostgreSQL10Dialect",
+                    "comment1": "dialect=org.hibernate.dialect.MySQL57Dialect",
+                    "comment2": "dialect.storage_engine=innodb",
+                    "jdbc": {
+                        "lob": {
+                            "non_contextual_creation": true
+                        }
+                    }
+                }
+            },
+            "hibernate": {
+                "comment": "# Hibernate ddl auto (create, create-drop, validate, update)",
+                "ddl-auto": "update"
+            },
+            "open-in-view": false
+        },
+        "main": {
+            "allow-bean-definition-overriding": true
+        }
+    },
+    "elasticsearch": {
+        "comment": "#Configuration for Elasticsearch",
+        "host": "localhost",
+        "port": 9200,
+        "http": "http",
+        "index": {
+            "element": "mms"
+        },
+        "limit": {
+            "insert": 80,
+            "result": 10000,
+            "term": 1000,
+            "scrollTimeout": 1000,
+            "get": 100000,
+            "index": 5000,
+            "commit": 100000
+        }
+    },
+    "twc": {
+        "comment": "#Configuration for TWC",
+        "comment-port": "#port is for REST interface",
+        "comment-aliases": "#aliases are for clustered usages",
+        "instances": [
+            {
+                "url": "dev-twc-03.domain.com",
+                "protocol": "https",
+                "port": 8111,
+                "aliases": [
+                    "dev-twc-02.domain.com",
+                    "dev-twc-01.domain.com"
+                ]
+            }
+        ]
+    },
+    "springdoc": {
+        "swagger-ui": {
+            "path": "/v3/swagger-ui.html",
+            "comment-endpoint": "#For sorting endpoints alphabetically",
+            "operationsSorter": "alpha",
+            "comment-tags": "#For sorting tags alphabetically",
+            "tagsSorter": "alpha"
+        },
+        "default-produces-media-type": "application/json",
+        "displayOperationId": true
+    },
+    "s3": {
+        "endpoint": "http://localhost:9000",
+        "access_key": "admintest",
+        "secret_key": "admintest",
+        "region": "optional",
+        "bucket": "optional"
+    }
+}
